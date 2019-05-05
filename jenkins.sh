@@ -1,13 +1,15 @@
 #!/bin/bash
 
-#sudo add-apt-repository ppa:webupd8team/java
+sudo add-apt-repository ppa:webupd8team/java
 sudo apt update
-#sudo apt install -y openjdk-8-jre
-sudo apt install curl
-curl -s "https://get.sdkman.io" | bash
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-sdk install java 8.0.212-zulu
-sdk install maven 3.6.1
+sudo apt install -y openjdk-8-jre
+sudo apt install -y openjdk-8-jdk
+sudo apt -y install maven
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export M2_HOME=/usr/share/maven
+export MAVEN_HOME=/usr/share/maven
+export PATH=${M2_HOME}/bin:${PATH}
+
 cd /tmp && wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 echo 'deb https://pkg.jenkins.io/debian-stable binary/' | sudo tee -a /etc/apt/sources.list.d/jenkins.list
 sudo apt update
