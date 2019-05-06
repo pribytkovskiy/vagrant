@@ -1,11 +1,11 @@
-upstream node_cluster {
-    server 192.168.1.11:3000;      # App instance 1
-    server 192.168.1.12:3001;      # App instance 2
+upstream www {
+    server 84.0.0.41:8080 max_fails=3 fail_timeout=30s;      # App instance 1
+    server 84.0.0.42:8080 max_fails=3 fail_timeout=30s;      # App instance 2
 }
 
 server {
     listen 80;
-    server_name yourdomain.com www.yourdomain.com;
+    server_name localhost;
 
     location / {
         proxy_set_header X-Real-IP $remote_addr;
@@ -13,7 +13,7 @@ server {
         proxy_set_header Host $http_host;
         proxy_set_header X-NginX-Proxy true;
 
-        proxy_pass http://node_cluster/;
+        proxy_pass http://www;
         proxy_redirect off;
     }
 }

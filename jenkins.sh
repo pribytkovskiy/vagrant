@@ -19,3 +19,7 @@ sudo systemctl start jenkins.service
 sudo systemctl enable jenkins.service
 
 sudo ufw allow 8080
+
+cd ./.ssh/
+sudo cp /home/vagrant/project/tomcat/app1.rsa.pub /home/vagrant/.ssh/app1.rsa.pub
+
