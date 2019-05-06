@@ -20,7 +20,15 @@ sudo systemctl daemon-reload
 sudo systemctl start tomcat
 sudo systemctl enable tomcat
 sudo systemctl status tomcat
+
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt install -y nodejs
+sudo apt install -y npm
+
+sudo ufw enable
+sudo ufw allow 22
 sudo ufw allow 8080
+sudo ufw allow 3000
 
 cd ./.ssh/
 ssh-keygen -t rsa -N '' -f app1.rsa

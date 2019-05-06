@@ -15,11 +15,18 @@ echo 'deb https://pkg.jenkins.io/debian-stable binary/' | sudo tee -a /etc/apt/s
 sudo apt update
 sudo apt install -y jenkins
 sudo systemctl stop jenkins.service
+
+sudo cp /home/vagrant/project/jenkins/config.xml /var/lib/jenkins/
+sudo mkdir -p /var/lib/jenkins/users/admin
+sudo cp /home/vagrant/project/jenkins/users/admin/config.xml /var/lib/jenkins/users/admin/
+sudo chown -R jenkins:jenkins /var/lib/jenkins/users/
+
 sudo systemctl start jenkins.service
 sudo systemctl enable jenkins.service
 
+sudo ufw enable
+sudo ufw allow 22
 sudo ufw allow 8080
 
 cd ./.ssh/
 sudo cp /home/vagrant/project/tomcat/app1.rsa.pub /home/vagrant/.ssh/app1.rsa.pub
-

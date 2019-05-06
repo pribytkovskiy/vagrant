@@ -8,19 +8,19 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/xenial64"
   config.vm.box_check_update = false
 
-  config.vm.define "base" do |base|
-    #base.vm.network "forwarded_port", guest: 8080, host: 8080, id: 'ci'
-    #base.vm.network "forwarded_port", guest: 80, host: 80, id: 'gate'
-    base.vm.network "private_network", ip: "84.0.0.2"
-    base.vm.hostname = "base"
-    base.vm.provider "virtualbox" do |vb|
-      vb.cpus = 2
-      vb.memory = "3072"
-    end
-    base.ssh.forward_agent = true
-    base.vm.synced_folder "./", "/home/vagrant/project"
-    base.vm.provision "shell" do |s|
-      s.path = "vagrant.sh"
+  (1..$db_mach).each do |i|
+    config.vm.define "db#{i}" do |db|
+      db.vm.network "private_network", ip: "84.0.0.#{30+i}"
+      db.vm.hostname = "db#{i}"
+      db.vm.provider "virtualbox" do |vb|
+        vb.cpus = 1
+        vb.memory = "512"
+      end
+      db.ssh.forward_agent = true
+      db.vm.synced_folder "./", "/home/vagrant/project"
+      db.vm.provision "shell" do |s|
+        s.path = "./mysql/mysql.sh"
+      end
     end
   end
 
@@ -35,21 +35,8 @@ Vagrant.configure(2) do |config|
       app.ssh.forward_agent = true
       app.vm.synced_folder "./", "/home/vagrant/project"
       app.vm.provision "shell" do |s|
-        s.path = "tomcat.sh"
+        s.path = "./tomcat/tomcat.sh"
       end
-    end
-  end
-
-  (1..$db_mach).each do |i|
-    config.vm.define "db#{i}" do |db|
-      db.vm.network "private_network", ip: "84.0.0.#{30+i}"
-      db.vm.hostname = "db#{i}"
-      db.vm.provider "virtualbox" do |vb|
-        vb.cpus = 1
-        vb.memory = "512"
-      end
-      db.ssh.forward_agent = true
-      db.vm.synced_folder "./", "/home/vagrant/project"
     end
   end
 
@@ -64,7 +51,7 @@ Vagrant.configure(2) do |config|
     ci.ssh.forward_agent = true
     ci.vm.synced_folder "./", "/home/vagrant/project"
     ci.vm.provision "shell" do |s|
-      s.path = "jenkins.sh"
+      s.path = "./jenkins/jenkins.sh"
     end
   end
 
@@ -79,7 +66,7 @@ Vagrant.configure(2) do |config|
     gate.ssh.forward_agent = true
     gate.vm.synced_folder "./", "/home/vagrant/project"
     gate.vm.provision "shell" do |s|
-      s.path = "nginx.sh"
+      s.path = "/nginx/nginx.sh"
     end
   end
 end
