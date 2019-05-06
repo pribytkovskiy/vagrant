@@ -30,6 +30,6 @@ sudo ufw allow 22
 sudo ufw allow 8080
 sudo ufw allow 3000
 
-cd ./.ssh/
-ssh-keygen -t rsa -N '' -f app1.rsa
-sudo cp /home/vagrant/.ssh/app1.rsa.pub /home/vagrant/project/tomcat/app1.rsa.pub
+#cd ./.ssh/
+#ssh-keygen -t rsa -N '' -f app1.rsa
+#sudo cp /home/vagrant/.ssh/app1.rsa.pub /home/vagrant/project/tomcat/app1.rsa.pub

@@ -28,5 +28,8 @@ sudo ufw enable
 sudo ufw allow 22
 sudo ufw allow 8080
 
+#cd ./.ssh/
+#sudo cp /home/vagrant/project/tomcat/app1.rsa.pub /home/vagrant/.ssh/app1.rsa.pub
 cd ./.ssh/
-sudo cp /home/vagrant/project/tomcat/app1.rsa.pub /home/vagrant/.ssh/app1.rsa.pub
+ssh-keygen -t rsa -N '' -f ci.rsa
+cat ~/.ssh/ci_rsa.pub | ssh vagrant@84.0.0.41 "mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys && chmod -R go= ~/.ssh && cat >> ~/.ssh/authorized_keys"
