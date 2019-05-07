@@ -28,8 +28,34 @@ sudo ufw enable
 sudo ufw allow 22
 sudo ufw allow 8080
 
-#cd ./.ssh/
-#sudo cp /home/vagrant/project/tomcat/app1.rsa.pub /home/vagrant/.ssh/app1.rsa.pub
-cd ./.ssh/
-ssh-keygen -t rsa -N '' -f ci.rsa
-cat ~/.ssh/ci_rsa.pub | ssh vagrant@84.0.0.41 "mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys && chmod -R go= ~/.ssh && cat >> ~/.ssh/authorized_keys"
+cp /home/vagrant/project/.vagrant/machines/app1/virtualbox/private_key /home/vagrant/.ssh/app1
+cp /home/vagrant/project/.vagrant/machines/app2/virtualbox/private_key /home/vagrant/.ssh/app2 #ssh -i ./.ssh/app#{i} vagrant@84.0.0.41
+sudo chown -R vagrant:vagrant /home/vagrant/.ssh/app1
+sudo chown -R vagrant:vagrant /home/vagrant/.ssh/app2
+
+#chmod 777 /home/vagrant/.ssh/app1
+#chmod 777 /home/vagrant/.ssh/app2
+
+#cd /home/vagrant/.ssh/
+#ssh-keygen -t rsa -N '' -f ci.rsa
+#cp /home/vagrant/.ssh/ci.rsa.pub /home/vagrant/project/ci.rsa.pub
+
+#sudo apt install -y sshpass
+#cat ~/.ssh/ci.rsa.pub | sshpass -p 'admin' ssh ssh@84.0.0.41 "mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys && chmod -R go= ~/.ssh && cat >> ~/.ssh/authorized_keys"
+#ssh -i ci.rsa ssh@84.0.0.41
+
+#cp /home/vagrant/project/app1.rsa /home/vagrant/.ssh/app1.rsa
+#rm /home/vagrant/project/app1.rsa
+#chmod 600 app1.rsa
+#echo "Host app1" >> config
+#echo "Hostname app1" >> config
+#echo "IdentityFile ~/.ssh/app1.rsa" >> config
+#ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" vagrant@84.0.0.41 echo 'Hi'
+
+#cp /home/vagrant/project/app2.rsa /home/vagrant/.ssh/app2.rsa
+#rm /home/vagrant/project/app2.rsa
+#chmod 600 app2.rsa
+#echo "Host app2" >> config
+#echo "Hostname app2" >> config
+#echo "IdentityFile2 ~/.ssh/app2.rsa" >> config
+#ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" vagrant@84.0.0.42 echo 'Hi'

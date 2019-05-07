@@ -66,7 +66,7 @@ Vagrant.configure(2) do |config|
     gate.ssh.forward_agent = true
     gate.vm.synced_folder "./", "/home/vagrant/project"
     gate.vm.provision "shell" do |s|
-      s.path = "/nginx/nginx.sh"
+      s.path = "./nginx/nginx.sh"
     end
   end
 end
