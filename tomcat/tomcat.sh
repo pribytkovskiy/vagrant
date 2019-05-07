@@ -35,27 +35,3 @@ sudo ufw enable
 sudo ufw allow 22
 sudo ufw allow 8080
 sudo ufw allow 3000
-
-#sudo chown -R tomcat /opt/tomcat/
-#sudo -s -u tomcat 
-#sh /opt/tomcat/bikeChampionship/backend/mvnw install
-#sh /opt/tomcat/bikeChampionship/backend/mvnw spring-boot:run -f ./server/ 
-#./mvnw spring-boot:run
-
-#sudo useradd -p '$1$9DX7Rwnk$9ei1vao6efFMYsDj3uQja0' -s /bin/false -g ssh -d /home/ssh ssh
-#sudo mkdir /home/ssh
-#sudo usermod --shell /bin/bash --home /home/ssh ssh
-#sudo chown -R ssh:ssh /home/ssh
-#sudo sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/" /etc/ssh/sshd_config
-#sudo service sshd restart
-
-#cd /home/vagrant/.ssh/
-#cp /home/vagrant/project/ci.rsa.pub /home/vagrant/.ssh/ci.rsa.pub
-#cat ./ci.rsa.pub >> ./authorized_keys
-
-#cp /etc/skel/.* /home/ssh/
-#ssh-keygen -t rsa -N '' -f $HOSTNAME.rsa
-#cat $HOSTNAME.rsa.pub >> authorized_keys
-#chmod 600 authorized_keys
-#rm $HOSTNAME.rsa.pub
-#cp ./$HOSTNAME.rsa /home/vagrant/project/$HOSTNAME.rsa
