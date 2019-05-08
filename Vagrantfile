@@ -46,7 +46,7 @@ Vagrant.configure(2) do |config|
     ci.vm.hostname = "ci"
     ci.vm.provider "virtualbox" do |vb|
       vb.cpus = 1
-      vb.memory = "512"
+      vb.memory = "1512"
     end
     ci.ssh.forward_agent = true
     ci.vm.synced_folder "./", "/home/vagrant/project"

@@ -5,7 +5,7 @@ sudo apt update
 sudo apt install -y openjdk-8-jre
 sudo apt install -y openjdk-8-jdk
 sudo apt -y install maven
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 #/usr/lib/jvm/java-1.8.0-openjdk-amd64
 export M2_HOME=/usr/share/maven
 export MAVEN_HOME=/usr/share/maven
 export PATH=${M2_HOME}/bin:${PATH}
@@ -32,3 +32,6 @@ cp /home/vagrant/project/.vagrant/machines/app1/virtualbox/private_key /home/vag
 cp /home/vagrant/project/.vagrant/machines/app2/virtualbox/private_key /home/vagrant/.ssh/app2 #ssh -i ./.ssh/app#{i} vagrant@84.0.0.41
 sudo chown -R vagrant:vagrant /home/vagrant/.ssh/app1
 sudo chown -R vagrant:vagrant /home/vagrant/.ssh/app2
+sudo chown -R jenkins:jenkins /home/vagrant/.ssh/app1
+sudo chown -R jenkins:jenkins /home/vagrant/.ssh/app2
+
